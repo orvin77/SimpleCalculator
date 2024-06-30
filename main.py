@@ -1,3 +1,6 @@
+''' 
+Calculates the result of the inputted equation using PEMDAS 
+'''
 def calculate(equation):
     i = 0
     cur_num = 0
@@ -9,15 +12,22 @@ def calculate(equation):
         # parse string
         while i < len(equation) and equation[i].isnumeric():
             cur_num = cur_num * 10 + int(equation[i])
-            i += 1
+            i += 1 
+
         if operation == "+":
             result += cur_num
+            prev = cur_num
         elif operation == "-":
             result -= cur_num
+            prev = -cur_num
         elif operation == "*":
-            result *= cur_num
+            result -= prev
+            prev *= cur_num
+            result += prev
         elif operation == "/":
-            result /= cur_num
+            result -= prev
+            prev /= cur_num
+            result += prev
         
         if i < len(equation):
             operation = equation[i] 
@@ -25,7 +35,6 @@ def calculate(equation):
         cur_num = 0
 
         i += 1
-
     return result
 
 def main():
@@ -33,28 +42,7 @@ def main():
     equation = input ("Enter an equation to be solved: ")
     print(f"The equation is: {equation}")    
     result = calculate(equation)
-    
     print(result)
-
-        
-    #num1 = float(input("Enter a value: "))
-    #num2 = float(input("Enter another value: "))
-    #operation = input("Enter an operation(+, -, *, /): ")
-
-    #if operation == "+":
-    #    result = num1 + num2
-    #elif operation == "*":
-    #    result = num1 * num2
-    #elif operation == "-":
-    #    result = num1 - num2
-    #elif operation == "/":
-    #    result = num1 / num2
-    #else:
-    #    print("Invalid operation was inputted.")
-    
-    #print(f"{num1} {operation} {num2} = {result}")
-
 
 if __name__ == "__main__":
     main()
-
